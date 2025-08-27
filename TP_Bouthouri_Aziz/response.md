@@ -1,3 +1,21 @@
+Pourquoi DEBUG doit être False en production
+
+Révélation d’informations sensibles
+
+Quand DEBUG = True, Django affiche les erreurs complètes (stack traces, variables, requêtes SQL, clés secrètes) dans le navigateur.
+
+Cela peut aider un attaquant à trouver des failles dans votre application.
+
+Sécurité des templates et fichiers statiques
+
+Le mode debug permet de servir certains fichiers directement et peut exposer des chemins internes.
+
+Performances
+
+DEBUG = True active des vérifications supplémentaires et le rechargement automatique, ce qui ralentit l’application.
+
+
+
 Question: Qu’est-ce que le clickjacking et comment X_FRAME_OPTIONS protège contre cette attaque ?
 
 Réponse:
