@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Django Security Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/app.css' %}">
+
+</head>
+
+<body>
+    <main>
+        <h1>Projet Django — Lab de durcissement</h1>
+        <p>Cette page servira à tester CSRF, CSP, HSTS, cookies sécurisés, etc.</p>
+
+        <section>
+            <h2>Formulaire CSRF de test</h2>
+            <form method="post" action=".">
+                {% csrf_token %}
+                <input type="text" name="message" placeholder="Tape un message">
+                <button type="submit">Envoyer</button>
+            </form>
+            {% if request.method == "POST" %}
+            <p><strong>Reçu:</strong> {{ request.POST.message|default:"(vide)" }}</p>
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>JS & Statics</h2>
+            <button id="hello">Clique-moi</button>
+        </section>
+
+        <!-- Script inline (sera bloqué quand on activera une CSP stricte) -->
+        <script>
+            document.getElementById("hello").addEventListener("click", () => {
+                alert("Hello depuis un script inline !");
+            });
+        </script>
+
+        <!-- Script statique externe (on vérifiera CSP plus tard) -->
+        <script>alert("Test XSS")</script>
+        <script src="/static/core/app.js"></script>
+    </main>
+</body>
+
+</html>

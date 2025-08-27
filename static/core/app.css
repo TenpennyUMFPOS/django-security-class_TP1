@@ -1,0 +1,4 @@
+body { font-family: system-ui, sans-serif; padding: 2rem;}
+h1 { margin-bottom: 1rem; }
+main { max-width: 720px; }
+section { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
